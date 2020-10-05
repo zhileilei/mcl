@@ -56,7 +56,7 @@ namespace{
 	struct StdoutListener
 	{
 		static StdoutListener& getInstance() {
-		    if(inst == 0)
+		    if(inst == nullptr)
 		    {
 		        inst = new StdoutListener(true);
 		    }
@@ -65,7 +65,10 @@ namespace{
 		}
 
 		void println(const uint8_t level, const char* msg) {
-			#define ON_LEVEL(level, state) case level: doPrint(state, msg); break;
+			#define ON_LEVEL(level, state)  \
+					case level: \
+						doPrint(state, msg); \
+						break;
 
 			switch(level)
 			{
