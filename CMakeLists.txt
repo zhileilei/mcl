@@ -1,26 +1,30 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 
 project(mcl)
 
-if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-  message(
-    FATAL_ERROR
-      "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
-  )
+if(PROJECT_BINARY_DIR STREQUAL PROJECT_SOURCE_DIR)
+    message(
+        FATAL_ERROR
+        "In source build is forbiddend, please make a new fold, eg build to make project"
+    )
 endif()
 
-option(ENABLE_TEST "Build tests" OFF)
+
+option(ENABLE_TEST "enable test" OFF)
 
 add_library(${PROJECT_NAME} INTERFACE)
 
-target_include_directories(${PROJECT_NAME}
+target_include_directories(
+    ${PROJECT_NAME} 
     INTERFACE
-        ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/include
 )
 
 if(ENABLE_TEST)
-    add_subdirectory(test)
+    enable_testing()
+    add_subdirectory(gtest)  
 endif()
 
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/ 
-    DESTINATION include)
+
+
+
