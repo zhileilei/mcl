@@ -17,7 +17,7 @@ fi
 echo "*******************************************************************************"
 echo "start to run tests..."
 
-./$target/test/mcl_test
+./$target/gtest/mcl_gtest
 
 if [ $? -ne 0 ]; then
     echo "FAILED!"
